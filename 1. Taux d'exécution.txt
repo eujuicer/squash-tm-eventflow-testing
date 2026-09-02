@@ -1,0 +1,309 @@
+1. Taux d'exécution ?
+
+84 % (21 tests exécutés sur 25). Il reste 4 tests "à exécuter" (16 %), aucun test n'est en cours d'exécution.
+
+
+2. Taux de réussite ?
+
+85,71 % de réussite parmi les tests exécutés (18 réussites sur 21 exécutés). Rapporté à l'ensemble des 25 tests, cela représente 72 % de réussite globale.
+
+
+3. Qu'est-ce qui échoue ?
+TC018 , TC004
+2 tests en échec (8 % du total, soit 9,52 % des tests exécutés)
+1 test bloqué (4 % du total)
+
+
+4. Quelle importance ont les cas en échec ?
+
+Très haute
+
+
+5. Quels tests importants ne sont pas exécutés ?
+
+Les 4 tests non exécutés sont tous classés "Très haute" importance (100 %). C'est le point le plus préoccupant du rapport : il ne s'agit pas de tests secondaires, mais des plus prioritaires du plan de test.
+
+
+6. Quelles exigences sont concernées ?
+
+Impossible à déterminer avec cette seule vue : aucune matrice reliant les tests aux exigences n'est visible ici. Il faudra ouvrir le détail des 4 tests non exécutés et des 2 tests en échec pour identifier précisément quelles exigences fonctionnelles sont concernées.
+
+
+7. Que savons-nous réellement ?
+
+84 % du plan de test a été exécuté, avec un taux de réussite correct (environ 86 % des tests exécutés)
+2 échecs et 1 blocage restent à investiguer
+4 tests n'ont jamais été lancés, et ils sont tous critiques ("Très haute" importance)
+
+
+8. Que ne savons-nous toujours pas ?
+
+La cause précise des 2 échecs et du test bloqué
+Le niveau de criticité réel de ces 3 cas problématiques
+Les exigences fonctionnelles couvertes par les 4 tests non exécutés et par les 2 échecs
+Si le blocage vient d'un problème technique (environnement, dépendance) ou d'un problème fonctionnel
+
+
+9. Recommanderais-tu une livraison maintenant ?
+
+Non, pas en l'état. Le taux de réussite est correct, mais 4 tests classés "Très haute" importance n'ont jamais été exécutés. Cela représente une zone d'incertitude totale sur des fonctionnalités jugées critiques pour le produit. Tant que ces 4 tests n'auront pas été joués (et que la cause des 2 échecs et du blocage ne sera pas comprise), il ne serait pas raisonnable de garantir la qualité de cette release. La recommandation est donc d'exécuter les tests critiques restants et d'analyser les échecs avant toute décision de livraison.
+
+Matrice risk based testing :
+
+Pourquoi ce placement :
+
+Réservation/capacité → risque élevé : c'est le cœur métier (survente de places, conflits de concurrence), impact fort et bugs fréquents sur la gestion de dispo.
+Paiement → risque élevé : impact très fort (argent, confiance client) même si la probabilité de bug peut être moyenne si le module est bien testé par le fournisseur de paiement.
+Promotions → risque élevé : règles métier complexes (cumuls, dates de validité, codes), donc probabilité de bug plus élevée, impact financier moyen.
+Panier → risque moyen : gênant si ça casse, mais rarement bloquant ou coûteux.
+Recherche → risque faible à moyen : dégrade l'expérience utilisateur, mais n'empêche pas la transaction.
+Back-office → risque faible à moyen : moins exposé (usage interne, moins d'utilisateurs simultanés), mais peut avoir un impact opérationnel si ça casse.
+
+
+Prioriser sous contrainte:
+
+Choix des 4 TC (tous priorité rouge = critique)
+TC-002 — Réserver la dernière place
+TC-004 — Refuser réservation événement complet
+TC-020 — Paiement réussi confirme une seule fois
+TC-011 — Refuser accès direct paiement panier vide
+Pourquoi ces 4 ?
+
+Réservation et Paiement sont les 2 modules classés risque élevé dans ma matrice. Sur les 25 TC, seuls 9 sont rouges (critiques) — 6 en Paiement, 3 en Réservation. Je garde ceux qui testent des garde-fous (survente, double paiement, contournement), pas les cas simples : c'est là qu'une régression coûte le plus cher et se voit le moins.
+
+Les 25 TC sont tous verts et sans anomalie aujourd'hui, donc je ne peux pas trier sur des échecs existants — juste sur le risque.
+
+Qu'est-ce que j'accepte de ne pas tester ?
+Les 5 autres TC rouges de Paiement/Réservation
+Tout Panier, Promotions, Recherche, Back-office, Événements (risque faible/moyen)
+Quel risque je prends ?
+
+Qu'une régression passe inaperçue sur ces modules secondaires — risque acceptable car aucun signal ne l'annonce, et l'impact y est bien plus faible que sur mes 4 TC.
+
+
+RAPPORT DE RECETTE : RELEASE SKILL UP
+Destinataire: Product Owner 
+Généré le: 31/08/2026
+
+
+PERIMETRE
+
+8 exigence couvertes à 100% par au moins un cas de test, 100%avec description.
+Répatition par criticité: 
+37,5 % Critique (3)
+37,5 % Majeure (3)
+25 % Non définie (2)
+
+
+ITERATION 1 
+
+25 test planifiés
+21 test exécutés (18 succès, 2 échecs, 1 bloqué) 
+4 non exécutés 
+Avancement 84%
+
+
+Anomalies / échecs
+
+Iteration 1
+2 echecs + 1 bloqué = 3 anomalies 
+Iteration 2 retest 
+3 succes, 1 echec = 1 anomalie 
+
+
+Exigences critiques
+
+3 des 8 exigences (37,5%) sont critiques 
+
+
+Choix RBT + Iteration 2
+
+Seuls les tests en echec ont été rejoués
+
+
+Risque résiduel
+
+1 echec de tres haute importance non resolu apres retest
+2 test de tres haute importance jamais executé 
+
+
+Ce qui reste non testé
+
+4 test de l'iteration 1 dont les 2 de tres haute importance
+
+
+Recommandation : GO / GO conditionnel / NO-GO 
+
+GO CONDITIONNEL 
+    SI Execute les 2 test de tres haute importance
+
+
+CRITERES D'ACCEPTATION 
+
+1) L'utilisateur peut modifier uniquement son profil 
+2) Les champs obligatoires ne peuvents pas etre vides
+3) Un email au format invalide est refusé
+4) Si l'enregistrement echoue le profil conserve les anciennes valeurs 
+5) Un message de confirmation s'affiche apres un enregistrement reussi
+6) Les modifs sont conservé après un enregistrement reussi
+
+
+CORRIGER DU MAUVAIS GHERKIN
+
+Given un utilisateur arrive sur la page d'accueil
+When il clique sur le bouton "Se connecter"
+Then le formulaire de connexion s'affiche
+
+Scénario : Réservation réussie
+  Given un utilisateur avec un article dans son panier
+  When il valide sa réservation
+  Then la réservation est confirmée
+
+Scénario : Paiement réussi
+  Given une réservation en attente de paiement
+  When il renseigne une carte valide and il clique sur payer
+  Then le paiement est accepté
+
+Scénario : Modification du profil
+  Given un utilisateur connecté sur sa page de profil
+  When il modifie son nom
+  Then le nouveau nom est enregistré
+
+3)
+Given un panier d'un montant de 100€
+When il applique le code promo "PROMO10" (-10%)
+Then le montant total affiché est 90€
+
+
+Atelier gherkin 
+
+1) Scenario: Réservation réussie avec assez de places disponibles
+  Given un événement avec au moins 3 places disponibles
+  When l'utilisateur réserve 3 billets
+  Then la réservation est acceptée
+  And le nombre de places disponibles diminue de 3
+
+2)Scenario: Réservation refusée si le nombre de places est insuffisant
+  Given un événement avec 3 places disponibles
+  When l'utilisateur réserve 4 billets
+  Then la réservation est refusée
+  And le nombre de places disponibles reste inchangé
+
+3)Scenario Outline: Limites du nombre de billets réservables
+  Given un événement avec assez de places disponibles
+  When l'utilisateur réserve <billets> billets
+  Then la réservation est <resultat>
+
+  Examples:
+    | billets | resultat |
+    | 0       | refusée  |
+    | 1       | acceptée |
+    | 6       | acceptée |
+    | 7       | refusée  |
+
+
+BONUS 
+
+Scenario: Publication acceptée avec toutes les informations valides
+  Given un organisateur a renseigné un titre, une date future et une capacité
+  When il publie l'événement
+  Then la publication est acceptée
+
+  Scenario: Publication refusée si la date est dans le passé
+  Given un organisateur a renseigné un titre, une capacité et une date passée
+  When il publie l'événement
+  Then la publication est refusée
+
+BONUS
+
+Scenario: Connexion réussie avec des identifiants valides
+  Given un utilisateur possède un compte actif
+  When il se connecte avec ses identifiants valides
+  Then la connexion est réussie
+  And il accède à son espace personnel
+
+Scenario: Connexion refusée pour un compte non activé
+  Given un utilisateur possède un compte non activé
+  When il se connecte avec des identifiants valides
+  Then la connexion est refusée
+  And le message "Compte non activé" s'affiche
+
+Scenario Outline: Connexion refusée pour des identifiants invalides
+  Given un utilisateur tente de se connecter avec <situation>
+  When il envoie sa demande de connexion
+  Then la connexion est refusée
+  And le message "Identifiants invalides" s'affiche
+
+  Examples:
+    | situation                  |
+    | un mauvais mot de passe    |
+    | un email inconnu           |
+
+
+
+
+
+UAT 
+
+1. Besoin reformulé
+Un client peut annuler sa réservation si elle n'est pas encore payée et si elle n'a pas encore expiré. Quand il annule, les places qu'il avait prises redeviennent disponibles tout de suite.
+
+2. Critères d'acceptation
+la réservation doit être non payée pour être annulée
+la réservation doit être non expirée pour être annulée
+après annulation, les places redeviennent disponibles immédiatement
+une réservation payée ne peut pas être annulée
+une réservation expirée ne peut pas être annulée
+
+3. Cas à tester
+réservation non payée + non expirée → annulation acceptée
+réservation payée → annulation refusée
+réservation expirée → annulation refusée
+
+4. Scénarios Gherkin
+gherkin
+Feature: Annulation d'une réservation
+
+Scenario: Annulation acceptée
+  Given un client a une réservation non payée et non expirée
+  When il annule sa réservation
+  Then la réservation est annulée
+  And les places redeviennent disponibles immédiatement
+ 
+Scenario: Annulation refusée si déjà payée
+  Given un client a une réservation payée
+  When il tente d'annuler sa réservation
+  Then l'annulation est refusée
+
+Scenario: Annulation refusée si déjà expirée
+  Given un client a une réservation expirée
+  When il tente d'annuler sa réservation
+  Then l'annulation est refusée
+
+5. Scenario Outline
+gherkin
+Scenario Outline: Annulation refusée selon le statut
+  Given un client a une réservation <statut>
+  When il tente d'annuler sa réservation
+  Then l'annulation est refusée
+
+  Examples:
+    | statut  |
+    | payée   |
+    | expirée |
+       
+6. Scénario UAT
+gherkin
+Scenario UAT: Le client annule et un autre en profite
+  Given un client A réserve les dernières places disponibles
+  When il annule sa réservation avant expiration
+  Then les places redeviennent disponibles
+  And un client B peut réserver ces mêmes places
+
+7. Risques (juste 1-2)
+les places ne se libèrent pas assez vite → risque de surbooking
+l'annulation et l'expiration automatique arrivent en même temps → conflit possible
+
+8. Ce qui ferait refuser l'acceptation
+les places ne redeviennent pas disponibles immédiatement après annulation
+une réservation payée peut quand même être annulée
