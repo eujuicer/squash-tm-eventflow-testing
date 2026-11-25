@@ -1,14 +1,14 @@
-# Gestion des tests avec Squash TM — TP EventFlow
+# Test management with Squash TM — EventFlow lab
 
-TP de gestion du cycle de test complet réalisé pendant ma formation Testeur QA (Bruxelles Formation / Cefora), avec l'outil **Squash TM**, lancé en local via Docker (`docker-compose.yml`).
+Lab on the complete test management cycle carried out during my QA Tester training (Bruxelles Formation / Cefora), using the **Squash TM** tool, run locally with Docker (`docker-compose.yml`).
 
-Application testée : **EventFlow Sandbox**, fournie par le formateur — voir [Davit-Ners-Bstorm/BXL-FORMATION-QA-ENGINEER-labo-squash](https://github.com/Davit-Ners-Bstorm/BXL-FORMATION-QA-ENGINEER-labo-squash).
+Application under test: **EventFlow Sandbox**, provided by the trainer — see [Davit-Ners-Bstorm/BXL-FORMATION-QA-ENGINEER-labo-squash](https://github.com/Davit-Ners-Bstorm/BXL-FORMATION-QA-ENGINEER-labo-squash).
 
-Ce dépôt contient mes notes et analyses sur la chaîne complète de gestion des tests (Besoin → Exigence → Cas de test → Campagne → Itération → Exécution → Résultat) :
+This repository contains my notes and analyses on the whole test management chain (Need → Requirement → Test case → Campaign → Iteration → Execution → Result). The documents themselves are written in French:
 
-- analyse d'un taux d'exécution et d'un taux de réussite de campagne (`1. Taux d'exécution.txt`)
-- matrice de risk-based testing pour prioriser les cas de test selon impact et probabilité
-- rapport de recette (GO / GO conditionnel / NO-GO) avec critères d'acceptation
-- scénarios Gherkin / BDD (réservation, paiement, connexion, annulation) et scénarios UAT
+- analysis of an execution rate and a campaign success rate (`1. Taux d'exécution.txt`)
+- risk-based testing matrix to prioritize test cases by impact and probability
+- acceptance report (GO / conditional GO / NO-GO) with acceptance criteria
+- Gherkin / BDD scenarios (booking, payment, login, cancellation) and UAT scenarios
 
-Objectif : démontrer une application concrète des techniques de gestion et d'analyse de tests vues en formation (traçabilité exigence ↔ cas de test, priorisation par le risque, rédaction BDD, recette produit), au-delà de la simple exécution manuelle.
+Goal: demonstrate a concrete application of the test management and analysis techniques learned during the training (requirement ↔ test case traceability, risk-based prioritization, BDD writing, product acceptance), beyond simple manual execution.
